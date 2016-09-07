@@ -32,9 +32,7 @@ Suites.CLUB != Suites.HEART // true
 
 // Create a function that returns suite's color ("red" or "black") using pattern matching
 def color(suite: Suite): String = suite match {
-  case Suites.CLUB => "red"
-  case Suites.DIAMOND => "red"
-  case Suites.HEART => "red"
-  case Suites.SPADE => "black"
+  case Suites.CLUB | Suites.SPADE => "black"
+  case Suites.DIAMOND | Suites.HEART => "red"
 }
 color(Suites.SPADE) // black
