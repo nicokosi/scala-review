@@ -18,17 +18,18 @@ new Suite("♣") // Suite(♣)
 Suite("♣") == Suite("♣") // true
 
 
-// Create an enumeration for all card suites with a "sealed case class":
-sealed case class EnumSuite(symbol: String)
+// Create an enumeration for all card suites with a "sealed case class" and a singleton:
 object Suites {
+  sealed case class EnumSuite(symbol: String)
   val CLUB = EnumSuite("♣")
-  val HEART = EnumSuite("♥")
   val DIAMOND = EnumSuite("♦")
+  val HEART = EnumSuite("♥")
   val SPADE = Suite("♠")
+  val values = Seq(CLUB, HEART, DIAMOND, SPADE)
 }
-// This way, there can only be 4 card suites since sealed classes cannot be instanciated elsewhere TODO check
+// This way, there can only be 4 card suites since sealed classes cannot be instanciated elsewhere
 Suites.CLUB != Suites.HEART // true
-
+Suites.values // List(EnumSuite(♣), EnumSuite(♥), EnumSuite(♦), Suite(♠))
 
 // Create a function that returns suite's color ("red" or "black") using pattern matching
 def color(suite: Suite): String = suite match {
