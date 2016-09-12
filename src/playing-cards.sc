@@ -35,13 +35,14 @@ Suite("♣").eq(Suite("♣")) // false
 Suite("♣").hashCode() // 1302714609
 Suite("♣").hashCode() // 1302714609
 
+
 // Create an enumeration for all card suites with a "sealed case class" and a singleton:
 object Suites {
-  sealed case class EnumSuite(symbol: String)
-  val CLUB = EnumSuite("♣")
-  val DIAMOND = EnumSuite("♦")
-  val HEART = EnumSuite("♥")
-  val SPADE = Suite("♠")
+  sealed case class EnumSuite(symbol: String, label: String)
+  val CLUB = EnumSuite("♣", "club")
+  val DIAMOND = EnumSuite("♦", "diamond")
+  val HEART = EnumSuite("♥", "heart")
+  val SPADE = EnumSuite("♠", "spade")
   val values = Seq(CLUB, HEART, DIAMOND, SPADE)
 }
 // This way, there can only be 4 card suites since sealed classes cannot be instanciated elsewhere
@@ -49,8 +50,11 @@ Suites.CLUB != Suites.HEART // true
 Suites.values // List(EnumSuite(♣), EnumSuite(♥), EnumSuite(♦), Suite(♠))
 
 // Create a function that returns suite's color ("red" or "black") using pattern matching
-def color(suite: Suite): String = suite match {
-  case Suites.CLUB | Suites.SPADE => "black"
-  case Suites.DIAMOND | Suites.HEART => "red"
+import Suites.EnumSuite
+def color(suite: EnumSuite): String = suite match {
+  case EnumSuite("♣", label) => s"$label is black"
+  case EnumSuite("♠", label) => s"$label is black"
+  case EnumSuite(_, label) => s"$label is red"
 }
-color(Suites.SPADE) // black
+
+color(Suites.SPADE)
