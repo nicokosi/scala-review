@@ -3,21 +3,22 @@ object CardSuites extends Enumeration {
   val CLUB, DIAMOND, HEART, SPADE = Value
 }
 
-def symbol(cardSuite: CardSuites.CardSuite) = cardSuite match {
-  case CardSuites.CLUB => "♣"
-  case CardSuites.DIAMOND => "♦"
-  case CardSuites.HEART => "♥"
-  case CardSuites.SPADE => "♠"
+import CardSuites.{CardSuite, CLUB, DIAMOND, HEART, SPADE}
+def symbol(cardSuite: CardSuite) = cardSuite match {
+  case CLUB => "♣"
+  case DIAMOND => "♦"
+  case HEART => "♥"
+  case SPADE => "♠"
 }
-symbol(CardSuites.CLUB) // ♣
+symbol(CLUB) // ♣
 
-def justColor(cardSuite: CardSuites.CardSuite): String = cardSuite match {
-  case CardSuites.CLUB | CardSuites.SPADE => "black"
-  case CardSuites.DIAMOND | CardSuites.HEART => "red"
+def color(cardSuite: CardSuite): String = cardSuite match {
+  case CLUB | SPADE => "black"
+  case DIAMOND | HEART => "red"
 }
-justColor(CardSuites.CLUB) // black
+color(CLUB) // black
 
-def describeColor(cardSuite: CardSuites.CardSuite): String =
-  s"${symbol(cardSuite)} is ${justColor(cardSuite)}"
+def describeColor(cardSuite: CardSuite): String =
+  s"${symbol(cardSuite)} is ${color(cardSuite)}"
 
-describeColor(CardSuites.SPADE) // ♠ is black
+describeColor(SPADE) // ♠ is black
